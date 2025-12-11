@@ -1,0 +1,12 @@
+# Render.com Blueprint configuration
+services:
+  - type: web
+    name: esp8266-ota-server
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
