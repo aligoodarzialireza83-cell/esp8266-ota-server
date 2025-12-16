@@ -6,6 +6,17 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use((req, res , next){
+res.header('Access-Control-Allow-Orinig', '*'); 
+res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); 
+res.header('Access-Control-Allow-Headers', 'Content-Type, x-esp8266-version, x-esp8266-chip-id, x-esp8266-free-space'); 
+if(req.method === 'OPTIONS'){
+    return res.sendStatus(200);
+
+}
+ next();
+});
+
 // Ensure firmware directory exists
 const firmwareDir = path.join(__dirname, 'firmware');
 if (!fs.existsSync(firmwareDir)) {
